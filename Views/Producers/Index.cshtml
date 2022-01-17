@@ -1,0 +1,47 @@
+﻿@*Define model*@
+@model IEnumerable<Producer>
+@*Define ViewData*@
+@{
+    ViewData["Title"] = "List of Producers";
+    Layout = "_Layout";
+}
+
+@*Write Code*@
+<h1>Actorviews</h1>
+<div class="row">
+    <div class="col-md-12 offset-md-2">
+        <table>
+            <thead>
+                <tr class="text-center">
+                    <th class="mx-2 px-4 py-2">@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
+                    <th class="mx-2 px-4 py-2">@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th class="mx-2 px-4 py-2">@Html.DisplayNameFor(model => model.Bio)</th>
+                    <th class="mx-2 px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle mx-2 px-4 py-2">
+                            <img class="rounded-circle" src="@item.ProfilePictureURL" alt="@item.FullName" style="max-width:150px" />
+                        </td>
+                        <td class="align-middle mx-2 px-4 py-2">
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td class="align-middle mx-2 px-4 py-2">
+                            @Html.DisplayFor(modelItem => item.Bio)
+                        </td>
+                        <td class="align-middle mx-2 px-4 py-2">
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square">Edit</i></a>
+                            <a class="btn btn-outline-infor" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye">Details</i></a>
+                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-eye">Erase</i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+@await Html.PartialAsync("_CreateItem", "Producers");
